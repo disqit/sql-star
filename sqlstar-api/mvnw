@@ -1,0 +1,17 @@
+#!/bin/sh
+# Minimal Apache Maven Wrapper launcher script for Unix-like systems.
+
+BASEDIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Locate Java
+if [ -n "$JAVA_HOME" ] && [ -x "$JAVA_HOME/bin/java" ]; then
+  JAVA_CMD="$JAVA_HOME/bin/java"
+else
+  JAVA_CMD="java"
+fi
+
+# Execute Maven Wrapper
+exec "$JAVA_CMD" \
+  -classpath "$BASEDIR/.mvn/wrapper/maven-wrapper.jar" \
+  -Dmaven.multiModuleProjectDirectory="$BASEDIR" \
+  org.apache.maven.wrapper.MavenWrapperMain "$@"
